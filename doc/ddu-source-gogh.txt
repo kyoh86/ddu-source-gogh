@@ -12,6 +12,7 @@ Introduction					|ddu-source-gogh-introdution|
 Install						|ddu-source-gogh-install|
 Examples					|ddu-source-gogh-examples|
 Params						|ddu-source-gogh-params|
+Actions						|ddu-source-gogh-actions|
 About						|ddu-source-gogh-about|
 
 
@@ -36,15 +37,40 @@ https://github.com/Shougo/ddu-kind-file
 EXAMPLES					*ddu-source-gogh-examples*
 
 >
-	" Use gogh source.
+	" Use gogh project source.
 	call ddu#start({
 	    \ 'sources': [{ 'name': 'gogh_project' }],
 	    \ 'kindOptions': { 'file': { 'defaultAction': 'cd' } }
 	    \ })
 <
 
+>
+	" Use gogh repo source.
+	call ddu#start({
+	    \ 'sources': [{ 'name': 'gogh_repo' }],
+	    \ 'kindOptions': { 'gogh_repo': { 'defaultAction': 'browse' } }
+	    \ })
+<
+
 ==============================================================================
 PARAMS						*ddu-source-gogh-params*
+
+
+==============================================================================
+ACTIONS						*ddu-source-gogh-actions*
+
+gogh_project uses |ddu-kind-file| actions.
+You can see their actions in |ddu-kind-file-actions|.
+gogh_repo has unique actions that is descripted in below.
+
+						*ddu-source-gogh-action-browse*
+browse
+	Browse the URL in your default browser.
+
+	
+						*ddu-source-gogh-action-get*
+get
+	Clone the repository with `gogh get`.
 
 
 ==============================================================================
