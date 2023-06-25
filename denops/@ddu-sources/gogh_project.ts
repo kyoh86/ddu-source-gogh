@@ -30,7 +30,7 @@ type GoghProject = {
 };
 
 export class Source extends BaseSource<Params, ActionData> {
-  override kind = "file";
+  override kind = "gogh_project";
 
   override gather(
     args: GatherArguments<Params>,
