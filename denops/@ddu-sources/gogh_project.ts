@@ -1,6 +1,6 @@
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.2.7/base/source.ts";
-import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.5.0/file.ts";
+import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.5.1/file.ts";
 
 import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.2.7/types.ts";
 import { pathshorten } from "https://deno.land/x/denops_std@v5.0.1/function/mod.ts";
