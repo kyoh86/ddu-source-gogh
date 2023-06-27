@@ -11,7 +11,7 @@ import {
   JSONValue,
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
-import { EchomsgStream } from "../util/msg_stream.ts";
+import { EchomsgStream } from "./gogh_util/msg_stream.ts";
 
 type ActionData = FileActionData;
 
