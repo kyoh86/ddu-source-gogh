@@ -3,10 +3,10 @@ import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v3.2.7/types.ts";
-import { join } from "https://deno.land/std@0.192.0/path/mod.ts";
-import { exists, expandGlob } from "https://deno.land/std@0.192.0/fs/mod.ts";
-import { Kind as FileKind } from "https://deno.land/x/ddu_kind_file@v0.5.2/file.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.2/types.ts";
+import { join } from "https://deno.land/std@0.194.0/path/mod.ts";
+import { exists, expandGlob } from "https://deno.land/std@0.194.0/fs/mod.ts";
+import { Kind as FileKind } from "https://deno.land/x/ddu_kind_file@v0.5.3/file.ts";
 
 async function searchReadme(dir: string) {
   for (const name of ["README", "README.md", "README.markdown"]) {
