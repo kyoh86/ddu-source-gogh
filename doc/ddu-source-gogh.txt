@@ -10,12 +10,16 @@ URL: https://github.com/kyoh86/ddu-source-gogh
                                                     *ddu-source-gogh-contents*
 Contents ~
 
-Introduction					|ddu-source-gogh-introdution|
-Install						|ddu-source-gogh-install|
-Examples					|ddu-source-gogh-examples|
-Params						|ddu-source-gogh-params|
-Actions						|ddu-source-gogh-actions|
-About						|ddu-source-gogh-about|
+Introduction				|ddu-source-gogh-introdution|
+Install					|ddu-source-gogh-install|
+Examples				|ddu-source-gogh-examples|
+Sources					|ddu-source-gogh-sources|
+Params for gogh_repo source		|ddu-source-gogh_repo-params|
+Params for gogh_project source		|ddu-source-gogh_project-params|
+Actions of gogh_repo kind 		|ddu-source-gogh_repo-actions|
+Action-data for gogh_repo kind		|ddu-kind-gogh_repo-action-data|
+Actions of gogh_project kind 		|ddu-source-gogh_project-actions|
+Action-data for gogh_project kind	|ddu-kind-gogh_project-action-data|
 
 
 ==============================================================================
@@ -58,26 +62,105 @@ Examples ~
 <
 
 ==============================================================================
-                                                      *ddu-source-gogh-params*
-Params ~
+                                                     *ddu-source-gogh-sources*
+Sources ~
+
+gogh_repo
+	A source to collect your GitHub repositories with gogh.
+	It generates items for a kind "gogh_repo".
+	A handler for the kind "gogh_repo" is included in this plugin; see
+	|ddu-kind-gogh_repo|.
+
+gogh_project
+	A source to collect your local project managed by gogh.
+	It generates items for a kind "gogh_project".
+	A handler for the kind "gogh_project" is included in this plugin; see
+	|ddu-kind-gogh_project|.
 
 
 ==============================================================================
-                                                     *ddu-source-gogh-actions*
-Actions ~
+                                                 *ddu-source-gogh_repo-params*
+Params for gogh_repo source ~
 
-gogh_project uses |ddu-kind-file| actions.
-You can see their actions in |ddu-kind-file-actions|.
-gogh_repo has unique actions that is descripted in below.
+display
+	("url" | "spec")
+	Item display. If it is "url", it shows full URL of the repository.
+	If it is "spec", it shows spec of the repository (like "kyoh86/gogh").
 
-						*ddu-source-gogh-action-browse*
+	Default: "spec"
+
+==============================================================================
+                                              *ddu-source-gogh_project-params*
+Params for gogh_project source ~
+
+display
+	("url" | "rel-path" | "rel-file-path" | "full-file-path" | "shorten")
+	Item display.
+
+	"url"
+		URL of the repository that is guessed by the path.
+
+	"rel-path"
+		Relative path from gogh root.
+
+	"rel-file-path"
+		Relative file path from gogh root.
+		It will be formed by path separator.
+
+	"full-file-path"
+		Full file path.
+
+	"shorten"
+		The path of the project, reduced to a minimum identifiable
+		within the list of projects managed by gogh.
+
+	Default: "rel-path".
+
+
+==============================================================================
+                             *ddu-kind-gogh_repo* *ddu-kind-gogh_repo-actions*
+Actions of gogh_repo kind ~
+
+                                          *ddu-source-gogh_repo-action-browse*
 browse
 	Browse the URL in your default browser.
 
-	
-						*ddu-source-gogh-action-get*
+
+                                             *ddu-source-gogh_repo-action-get*
 get
 	Clone the repository with `gogh get`.
+
+
+==============================================================================
+                                              *ddu-kind-gogh_repo-action-data*
+Action-data for gogh_repo kind ~
+
+Each items holds action data with "spec" and some properties of the repository
+like below.
+
+spec
+	(object)
+	An identifier of the repository with properties below.
+	host  (string|null)
+	owner (string)
+	name  (string)
+
+updatedAt    (string|null)
+url          (string)
+description  (string|null)
+homepage     (string|null)
+language     (string|null)
+archived     (boolean|null)
+private      (boolean|null)
+isTemplate   (boolean|null)
+
+
+==============================================================================
+                       *ddu-kind-gogh_project* *ddu-kind-gogh_project-actions*
+Actions of gogh_repo kind ~
+
+gogh_project uses |ddu-kind-file| actions.
+You can see their actions in |ddu-kind-file-actions|.
 
 
 ==============================================================================
