@@ -1,4 +1,5 @@
-*ddu-source-gogh.txt*				gogh source for ddu.vim
+                                                         *ddu-source-gogh.txt*
+gogh source for ddu.vim
 
 Author: kyoh86 <me@kyoh86.dev>
 License: MIT License
@@ -6,7 +7,8 @@ URL: https://github.com/kyoh86/ddu-source-gogh
 
 
 ==============================================================================
-CONTENTS					*ddu-source-gogh-contents*
+                                                    *ddu-source-gogh-contents*
+Contents ~
 
 Introduction					|ddu-source-gogh-introdution|
 Install						|ddu-source-gogh-install|
@@ -17,13 +19,15 @@ About						|ddu-source-gogh-about|
 
 
 ==============================================================================
-INTRODUCTION					*ddu-source-gogh-introdution*
+                                                 *ddu-source-gogh-introdution*
+Introduction ~
 
 ddu.vim source collects project paths managed in gogh.
 
 
 ==============================================================================
-INSTALL						*ddu-source-gogh-install*
+                                                     *ddu-source-gogh-install*
+Install ~
 
 It depends on "gogh", "|ddu|.vim", "|denops.vim|" and "|ddu-kind-file|".
 
@@ -34,7 +38,8 @@ https://github.com/Shougo/ddu-kind-file
 
 
 ==============================================================================
-EXAMPLES					*ddu-source-gogh-examples*
+                                                    *ddu-source-gogh-examples*
+Examples ~
 
 >
 	" Use gogh project source.
@@ -53,11 +58,13 @@ EXAMPLES					*ddu-source-gogh-examples*
 <
 
 ==============================================================================
-PARAMS						*ddu-source-gogh-params*
+                                                      *ddu-source-gogh-params*
+Params ~
 
 
 ==============================================================================
-ACTIONS						*ddu-source-gogh-actions*
+                                                     *ddu-source-gogh-actions*
+Actions ~
 
 gogh_project uses |ddu-kind-file| actions.
 You can see their actions in |ddu-kind-file-actions|.
