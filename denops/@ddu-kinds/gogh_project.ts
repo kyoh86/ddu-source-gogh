@@ -3,7 +3,7 @@ import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v3.5.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.6.0/types.ts";
 import { join } from "https://deno.land/std@0.200.0/path/mod.ts";
 import { exists, expandGlob } from "https://deno.land/std@0.200.0/fs/mod.ts";
 import { Kind as FileKind } from "https://deno.land/x/ddu_kind_file@v0.5.3/file.ts";
