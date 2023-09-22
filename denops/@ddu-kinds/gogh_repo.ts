@@ -4,6 +4,8 @@ import {
   BaseKind,
 } from "https://deno.land/x/ddu_vim@v3.6.0/types.ts";
 
+import { UrlActions } from "https://denopkg.com/4513ECHO/ddu-kind-url@master/denops/@ddu-kinds/url.ts";
+
 export type ActionData = {
   updatedAt?: string;
   spec: {
@@ -20,17 +22,13 @@ export type ActionData = {
   isTemplate?: boolean;
 };
 
-type Params = Record<PropertyKey, never>;
+type Params = {
+  externalOpener: "openbrowser" | "external" | "systemopen" | "uiopen";
+};
 
 export class Kind extends BaseKind<Params> {
   override actions: Actions<Params> = {
-    browse: async (args) => {
-      for (const item of args.items) {
-        const action = item?.action as ActionData;
-        await args.denops.call("ddu#kind#file#open", action.url);
-      }
-      return ActionFlags.None;
-    },
+    browse: UrlActions.browse,
     get: async (args) => {
       await Promise.all(args.items.map(async (item) => {
         const action = item?.action as ActionData;
@@ -58,7 +56,10 @@ export class Kind extends BaseKind<Params> {
       return ActionFlags.None;
     },
   };
-  params(): Params {
-    return {};
+
+  override params(): Params {
+    return {
+      externalOpener: "systemopen",
+    };
   }
 }
