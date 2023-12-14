@@ -1,10 +1,10 @@
-import type { Denops } from "https://deno.land/x/denops_std@v5.1.0/mod.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
 import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.8.1/base/source.ts";
 import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 
 import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
-import { pathshorten } from "https://deno.land/x/denops_std@v5.1.0/function/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.208.0/streams/text_line_stream.ts";
+import { pathshorten } from "https://deno.land/x/denops_std@v5.2.0/function/mod.ts";
+import { TextLineStream } from "https://deno.land/std@0.209.0/streams/text_line_stream.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.2/mod.ts";
 import {
   JSONLinesParseStream,
