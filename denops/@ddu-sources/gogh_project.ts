@@ -4,7 +4,7 @@ import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_
 
 import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
 import { pathshorten } from "https://deno.land/x/denops_std@v5.2.0/function/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.209.0/streams/text_line_stream.ts";
+import { TextLineStream } from "https://deno.land/std@0.210.0/streams/text_line_stream.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.2/mod.ts";
 import {
   JSONLinesParseStream,

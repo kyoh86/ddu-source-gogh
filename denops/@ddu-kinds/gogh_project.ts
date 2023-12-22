@@ -5,8 +5,8 @@ import type {
   PreviewContext,
   Previewer,
 } from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
-import { join } from "https://deno.land/std@0.209.0/path/mod.ts";
-import { exists, expandGlob } from "https://deno.land/std@0.209.0/fs/mod.ts";
+import { join } from "https://deno.land/std@0.210.0/path/mod.ts";
+import { exists, expandGlob } from "https://deno.land/std@0.210.0/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import { UrlActions } from "https://denopkg.com/4513ECHO/ddu-kind-url@master/denops/@ddu-kinds/url.ts";
 
