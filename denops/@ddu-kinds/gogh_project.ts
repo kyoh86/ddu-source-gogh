@@ -1,10 +1,10 @@
 import type { Denops } from "https://deno.land/x/denops_core@v5.0.0/denops.ts";
-import { BaseKind } from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
+import { BaseKind } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
 import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
 import { join } from "https://deno.land/std@0.210.0/path/mod.ts";
 import { exists, expandGlob } from "https://deno.land/std@0.210.0/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
