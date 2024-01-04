@@ -1,4 +1,4 @@
-import type { Denops } from "https://deno.land/x/denops_core@v6.0.2/denops.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
 import {
   ActionFlags,
   BaseKind,
