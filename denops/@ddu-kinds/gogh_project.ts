@@ -1,4 +1,4 @@
-import type { Denops } from "https://deno.land/x/denops_core@v5.0.0/denops.ts";
+import type { Denops } from "https://deno.land/x/denops_core@v6.0.2/denops.ts";
 import { BaseKind } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
 import type {
   DduItem,
