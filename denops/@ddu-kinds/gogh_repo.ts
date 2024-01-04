@@ -1,10 +1,10 @@
 import {
+  ActionArguments,
   ActionFlags,
   Actions,
   BaseKind,
 } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
-
-import { UrlActions } from "https://denopkg.com/4513ECHO/ddu-kind-url@master/denops/@ddu-kinds/url.ts";
+import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
 
 export type ActionData = {
   updatedAt?: string;
@@ -28,7 +28,15 @@ type Params = {
 
 export class Kind extends BaseKind<Params> {
   override actions: Actions<Params> = {
-    browse: UrlActions.browse,
+    browse: async ({ items }: ActionArguments<Params>) => {
+      for (const item of items) {
+        const { url } = item.action as ActionData;
+        if (url) {
+          await systemopen(url);
+        }
+      }
+      return ActionFlags.None;
+    },
     get: async (args) => {
       await Promise.all(args.items.map(async (item) => {
         const action = item?.action as ActionData;

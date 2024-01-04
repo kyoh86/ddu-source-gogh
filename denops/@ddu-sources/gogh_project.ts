@@ -1,60 +1,71 @@
 import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
 import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.9.0/base/source.ts";
-import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
+import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
 
 import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
 import { pathshorten } from "https://deno.land/x/denops_std@v5.2.0/function/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.210.0/streams/text_line_stream.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.2/mod.ts";
 import {
   JSONLinesParseStream,
   JSONValue,
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
-import { EchomsgStream } from "./gogh_util/msg_stream.ts";
-
-type ActionData = FileActionData;
+import { echoerrCommand } from "https://denopkg.com/kyoh86/denops_util@v0.0.3/command.ts";
 
 type Params = {
   display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path" | "url";
-};
-
-type GoghProject = {
-  fullFilePath: string;
-  relPath: string;
-  relFilePath: string;
-  host: string;
-  owner: string;
-  name: string;
-  url: string;
 };
 
 export class Source extends BaseSource<Params, ActionData> {
   override kind = "gogh_project";
 
   override gather(
-    args: GatherArguments<Params>,
+    { denops, sourceParams }: GatherArguments<Params>,
   ): ReadableStream<Item<ActionData>[]> {
-    return this.listProjects(args)
-      .pipeThrough(
-        new TransformStream<JSONValue, Item<ActionData>>({
-          transform: async (value, controller) => {
-            const project = value as GoghProject;
-            controller.enqueue({
-              word: project.relPath,
-              display: await this.displayProject(args, project),
-              action: {
-                path: project.fullFilePath,
-                isDirectory: true,
-                url: project.url,
-              },
-              treePath: project.fullFilePath,
-              isTree: true,
-            });
-          },
-        }),
-      )
-      .pipeThrough(new ChunkedStream({ chunkSize: 1000 }));
+    return new ReadableStream<Item<ActionData>[]>({
+      start: async (controller) => {
+        const { wait, stdout } = echoerrCommand(denops, "gogh", {
+          args: ["list", "--format", "json"],
+        });
+        await Promise.all([
+          wait,
+          stdout
+            .pipeThrough(new JSONLinesParseStream())
+            .pipeThrough(
+              new TransformStream<JSONValue, Item<ActionData>>({
+                transform: async (value, controller) => {
+                  const project = value as GoghProject;
+                  controller.enqueue({
+                    word: project.relPath,
+                    display: await this.displayProject(
+                      denops,
+                      sourceParams,
+                      project,
+                    ),
+                    action: {
+                      ...project,
+                      path: project.fullFilePath,
+                      isDirectory: true,
+                    },
+                    treePath: project.fullFilePath,
+                    isTree: true,
+                  });
+                },
+              }),
+            )
+            .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
+            .pipeTo(
+              new WritableStream({
+                write: (chunk) => {
+                  controller.enqueue(chunk);
+                },
+              }),
+            ).finally(() => {
+              controller.close();
+            }),
+        ]);
+      },
+    });
   }
 
   override params(): Params {
@@ -64,12 +75,13 @@ export class Source extends BaseSource<Params, ActionData> {
   }
 
   async displayProject(
-    args: { denops: Denops; sourceParams: Params },
+    denops: Denops,
+    sourceParams: Params,
     project: GoghProject,
   ): Promise<string> {
-    switch (args.sourceParams.display) {
+    switch (sourceParams.display) {
       case "shorten":
-        return await pathshorten(args.denops, project.relPath);
+        return await pathshorten(denops, project.relPath);
       case "rel-path":
         return project.relPath;
       case "rel-file-path":
@@ -77,32 +89,12 @@ export class Source extends BaseSource<Params, ActionData> {
       case "full-file-path":
         return project.fullFilePath;
       default:
-        await args.denops.call(
+        await denops.call(
           "ddu#util#print_error",
-          `Invalid display param: ${args.sourceParams.display}`,
+          `Invalid display param: ${sourceParams.display}`,
           "ddu-source-gogh",
         );
         return project.fullFilePath;
     }
-  }
-
-  listProjects({ denops }: { denops: Denops }): ReadableStream<JSONValue> {
-    const { status, stderr, stdout } = new Deno.Command("gogh", {
-      args: ["list", "--format", "json"],
-      stdin: "null",
-      stderr: "piped",
-      stdout: "piped",
-    }).spawn();
-    status.then((status) => {
-      if (!status.success) {
-        stderr
-          .pipeThrough(new TextDecoderStream())
-          .pipeThrough(new TextLineStream())
-          .pipeTo(new EchomsgStream(denops, "gogh-source-project", true));
-      }
-    });
-    return stdout
-      .pipeThrough(new TextDecoderStream())
-      .pipeThrough(new JSONLinesParseStream());
   }
 }
