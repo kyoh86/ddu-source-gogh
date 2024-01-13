@@ -10,7 +10,7 @@ import {
   JSONValue,
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
-import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.3/command.ts";
+import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.5/command.ts";
 
 type Params = {
   display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path" | "url";
@@ -24,46 +24,45 @@ export class Source extends BaseSource<Params, ActionData> {
   ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream<Item<ActionData>[]>({
       start: async (controller) => {
-        const { wait, stdout } = echoerrCommand(denops, "gogh", {
+        const { waitErr, pipeOut, finalize } = echoerrCommand(denops, "gogh", {
           args: ["list", "--format", "json"],
         });
-        await Promise.all([
-          wait,
-          stdout
-            .pipeThrough(new JSONLinesParseStream())
-            .pipeThrough(
-              new TransformStream<JSONValue, Item<ActionData>>({
-                transform: async (value, controller) => {
-                  const project = value as GoghProject;
-                  controller.enqueue({
-                    word: project.relPath,
-                    display: await this.displayProject(
-                      denops,
-                      sourceParams,
-                      project,
-                    ),
-                    action: {
-                      ...project,
-                      path: project.fullFilePath,
-                      isDirectory: true,
-                    },
-                    treePath: project.fullFilePath,
-                    isTree: true,
-                  });
-                },
-              }),
-            )
-            .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
-            .pipeTo(
-              new WritableStream({
-                write: (chunk) => {
-                  controller.enqueue(chunk);
-                },
-              }),
-            ).finally(() => {
-              controller.close();
+        await pipeOut
+          .pipeThrough(new JSONLinesParseStream())
+          .pipeThrough(
+            new TransformStream<JSONValue, Item<ActionData>>({
+              transform: async (value, controller) => {
+                const project = value as GoghProject;
+                controller.enqueue({
+                  word: project.relPath,
+                  display: await this.displayProject(
+                    denops,
+                    sourceParams,
+                    project,
+                  ),
+                  action: {
+                    ...project,
+                    path: project.fullFilePath,
+                    isDirectory: true,
+                  },
+                  treePath: project.fullFilePath,
+                  isTree: true,
+                });
+              },
             }),
-        ]);
+          )
+          .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
+          .pipeTo(
+            new WritableStream({
+              write: (chunk) => {
+                controller.enqueue(chunk);
+              },
+            }),
+          ).finally(async () => {
+            await waitErr;
+            await finalize();
+            controller.close();
+          });
       },
     });
   }

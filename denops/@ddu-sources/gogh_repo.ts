@@ -8,7 +8,7 @@ import {
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
 import type { ActionData } from "../@ddu-kinds/gogh_repo.ts";
-import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.3/command.ts";
+import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.5/command.ts";
 
 type Params = {
   display: "url" | "spec";
@@ -22,36 +22,40 @@ export class Source extends BaseSource<Params, ActionData> {
   ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream<Item<ActionData>[]>({
       start: async (controller) => {
-        const { wait, stdout } = echoerrCommand(args.denops, "gogh", {
-          args: ["repos", "--format", "json"],
-        });
-        await Promise.all([
-          wait,
-          stdout
-            .pipeThrough(new JSONLinesParseStream())
-            .pipeThrough(
-              new TransformStream<JSONValue, Item<ActionData>>({
-                transform: async (value, controller) => {
-                  const repo = value as ActionData;
-                  controller.enqueue({
-                    word: repo.url,
-                    display: await this.displayProject(args, repo),
-                    action: repo,
-                  });
-                },
-              }),
-            )
-            .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
-            .pipeTo(
-              new WritableStream({
-                write: (chunk) => {
-                  controller.enqueue(chunk);
-                },
-              }),
-            ).finally(() => {
-              controller.close();
+        const { waitErr, pipeOut, finalize } = echoerrCommand(
+          args.denops,
+          "gogh",
+          {
+            args: ["repos", "--format", "json"],
+          },
+        );
+
+        await pipeOut
+          .pipeThrough(new JSONLinesParseStream())
+          .pipeThrough(
+            new TransformStream<JSONValue, Item<ActionData>>({
+              transform: async (value, controller) => {
+                const repo = value as ActionData;
+                controller.enqueue({
+                  word: repo.url,
+                  display: await this.displayProject(args, repo),
+                  action: repo,
+                });
+              },
             }),
-        ]);
+          )
+          .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
+          .pipeTo(
+            new WritableStream({
+              write: (chunk) => {
+                controller.enqueue(chunk);
+              },
+            }),
+          ).finally(async () => {
+            await waitErr;
+            await finalize();
+            controller.close();
+          });
       },
     });
   }
