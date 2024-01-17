@@ -8,7 +8,7 @@ import {
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
 import type { ActionData } from "../@ddu-kinds/gogh_repo.ts";
-import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.5/command.ts";
+import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.6/command.ts";
 
 type Params = {
   display: "url" | "spec";
