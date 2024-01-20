@@ -1,14 +1,14 @@
-import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.3.0/mod.ts";
 import {
   ActionFlags,
   BaseKind,
-} from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.10.0/types.ts";
 import type {
   ActionArguments,
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.10.0/types.ts";
 import { join } from "https://deno.land/std@0.212.0/path/mod.ts";
 import { exists, expandGlob } from "https://deno.land/std@0.212.0/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
