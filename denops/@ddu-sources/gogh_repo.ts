@@ -1,6 +1,6 @@
-import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.9.0/base/source.ts";
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.3.0/mod.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.10.0/base/source.ts";
+import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.10.0/types.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.2/mod.ts";
 import {
   JSONLinesParseStream,
