@@ -3,7 +3,7 @@ import {
   ActionFlags,
   Actions,
   BaseKind,
-} from "https://deno.land/x/ddu_vim@v3.10.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.10.2/types.ts";
 import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
 
 export type ActionData = {
