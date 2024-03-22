@@ -12,6 +12,7 @@ import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.7/co
 
 type Params = {
   display: "url" | "spec";
+  limit: number;
 };
 
 export class Source extends BaseSource<Params, ActionData> {
@@ -26,7 +27,13 @@ export class Source extends BaseSource<Params, ActionData> {
           args.denops,
           "gogh",
           {
-            args: ["repos", "--format", "json"],
+            args: [
+              "repos",
+              "--format",
+              "json",
+              "--limit",
+              args.sourceParams.limit.toString(),
+            ],
           },
         );
 
@@ -65,6 +72,7 @@ export class Source extends BaseSource<Params, ActionData> {
   override params(): Params {
     return {
       display: "spec",
+      limit: 30,
     };
   }
 

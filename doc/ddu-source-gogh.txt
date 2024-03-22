@@ -89,6 +89,11 @@ display
 
 	Default: "spec"
 
+limit
+	(number)
+	Max number of repositories to list. -1 means unlimited
+	Default: 30
+
 ==============================================================================
                                               *ddu-source-gogh_project-params*
 Params for gogh_project source ~
