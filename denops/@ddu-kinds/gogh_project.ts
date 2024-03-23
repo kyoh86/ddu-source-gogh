@@ -14,6 +14,7 @@ import { exists, expandGlob } from "https://deno.land/std@0.220.1/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
 import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
+import { openUrl } from "../ddu-kind-gogh/browsable.ts";
 
 export type GoghProject = {
   fullFilePath: string;
@@ -52,15 +53,7 @@ type Params = {
 export class Kind extends BaseKind<Params> {
   actions = {
     ...FileActions,
-    browse: async ({ items }: ActionArguments<Params>) => {
-      for (const item of items) {
-        const { url } = item.action as ActionData;
-        if (url) {
-          await systemopen(url);
-        }
-      }
-      return ActionFlags.None;
-    },
+    browse: openUrl,
   };
 
   async getPreviewer(

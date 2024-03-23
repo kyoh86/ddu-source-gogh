@@ -127,9 +127,13 @@ display
 Actions of gogh_repo kind ~
 
                                           *ddu-source-gogh_repo-action-browse*
-browse
-	Browse the URL in your default browser.
 
+browse
+	Browse the repo in your browser.
+	Parameters:
+		opener
+			An external command name to open it.
+			e.g. "xdg-open", "wslview", etc.
 
                                              *ddu-source-gogh_repo-action-get*
 get

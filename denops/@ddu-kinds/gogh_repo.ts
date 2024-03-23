@@ -1,10 +1,9 @@
 import {
-  ActionArguments,
   ActionFlags,
   Actions,
   BaseKind,
 } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
+import { openUrl } from "../ddu-kind-gogh/browsable.ts";
 
 export type ActionData = {
   updatedAt?: string;
@@ -22,21 +21,11 @@ export type ActionData = {
   isTemplate?: boolean;
 };
 
-type Params = {
-  externalOpener: "openbrowser" | "external" | "systemopen" | "uiopen";
-};
+type Params = Record<string, never>;
 
 export class Kind extends BaseKind<Params> {
   override actions: Actions<Params> = {
-    browse: async ({ items }: ActionArguments<Params>) => {
-      for (const item of items) {
-        const { url } = item.action as ActionData;
-        if (url) {
-          await systemopen(url);
-        }
-      }
-      return ActionFlags.None;
-    },
+    browse: openUrl,
     get: async (args) => {
       await Promise.all(args.items.map(async (item) => {
         const action = item?.action as ActionData;
@@ -66,8 +55,6 @@ export class Kind extends BaseKind<Params> {
   };
 
   override params(): Params {
-    return {
-      externalOpener: "systemopen",
-    };
+    return {};
   }
 }
