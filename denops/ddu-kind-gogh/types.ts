@@ -1,4 +1,7 @@
-import { PredicateType, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+import {
+  is,
+  PredicateType,
+} from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
 
 export const isRepoActionData = is.ObjectOf({
   updatedAt: is.OptionalOf(is.String),
@@ -35,8 +38,11 @@ export type RepoActionData = {
 // @ts-ignore ignore
 function _check() {
   // deno-lint-ignore no-explicit-any
-  const c1: PredicateType<typeof isRepoActionData> = {} as any as RepoActionData;
+  const c1: PredicateType<typeof isRepoActionData> =
+    {} as any as RepoActionData;
   // deno-lint-ignore no-explicit-any
-  const c2: RepoActionData = {} as any as PredicateType<typeof isRepoActionData>;
+  const c2: RepoActionData = {} as any as PredicateType<
+    typeof isRepoActionData
+  >;
   console.log(c1, c2);
 }
