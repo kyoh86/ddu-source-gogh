@@ -5,6 +5,7 @@ import {
   maybe,
 } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
 import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
+import { isRepoActionData } from "./types.ts";
 
 export function main(denops: Denops) {
   denops.dispatcher = {
@@ -23,6 +24,14 @@ export function main(denops: Denops) {
       } else {
         await systemopen(url);
       }
+    },
+    async get(uAction: unknown) {
+      const action = ensure(uAction, isRepoActionData);
+      const command = new Deno.Command("gogh", {
+        args: ["get", action.spec.owner + "/" + action.spec.name],
+      });
+      const proc = command.spawn();
+      await proc.status;
     },
   };
 }

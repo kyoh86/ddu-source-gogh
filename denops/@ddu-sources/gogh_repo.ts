@@ -7,7 +7,7 @@ import {
   JSONValue,
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
-import type { ActionData } from "../@ddu-kinds/gogh_repo.ts";
+import type { RepoActionData } from "../ddu-kind-gogh/types.ts";
 import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.7/command.ts";
 
 type Params = {
@@ -15,13 +15,13 @@ type Params = {
   limit: number;
 };
 
-export class Source extends BaseSource<Params, ActionData> {
+export class Source extends BaseSource<Params, RepoActionData> {
   override kind = "gogh_repo"; // create action: gogh get
 
   override gather(
     args: GatherArguments<Params>,
-  ): ReadableStream<Item<ActionData>[]> {
-    return new ReadableStream<Item<ActionData>[]>({
+  ): ReadableStream<Item<RepoActionData>[]> {
+    return new ReadableStream<Item<RepoActionData>[]>({
       start: async (controller) => {
         const { wait, pipeOut, finalize } = echoerrCommand(
           args.denops,
@@ -41,9 +41,9 @@ export class Source extends BaseSource<Params, ActionData> {
           pipeOut
             .pipeThrough(new JSONLinesParseStream())
             .pipeThrough(
-              new TransformStream<JSONValue, Item<ActionData>>({
+              new TransformStream<JSONValue, Item<RepoActionData>>({
                 transform: async (value, controller) => {
-                  const repo = value as ActionData;
+                  const repo = value as RepoActionData;
                   controller.enqueue({
                     word: repo.url,
                     display: await this.displayProject(args, repo),
@@ -78,7 +78,7 @@ export class Source extends BaseSource<Params, ActionData> {
 
   async displayProject(
     args: { denops: Denops; sourceParams: Params },
-    repo: ActionData,
+    repo: RepoActionData,
   ): Promise<string> {
     switch (args.sourceParams.display) {
       case "spec":
