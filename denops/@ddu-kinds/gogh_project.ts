@@ -1,12 +1,12 @@
 import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
-import { BaseKind } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
+import { BaseKind } from "https://deno.land/x/ddu_vim@v4.0.0/types.ts";
 import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import { join } from "https://deno.land/std@0.222.1/path/mod.ts";
-import { exists, expandGlob } from "https://deno.land/std@0.222.1/fs/mod.ts";
+} from "https://deno.land/x/ddu_vim@v4.0.0/types.ts";
+import { join } from "https://deno.land/std@0.223.0/path/mod.ts";
+import { exists, expandGlob } from "https://deno.land/std@0.223.0/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import type { ActionData as FileActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import { openUrl } from "../ddu-kind-gogh/browsable.ts";

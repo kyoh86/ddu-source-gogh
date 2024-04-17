@@ -1,6 +1,6 @@
 import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.10.3/base/source.ts";
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v4.0.0/base/source.ts";
+import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v4.0.0/types.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.4/mod.ts";
 import {
   JSONLinesParseStream,
@@ -8,7 +8,7 @@ import {
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
 import type { RepoActionData } from "../ddu-kind-gogh/types.ts";
-import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.7/command.ts";
+import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@v0.0.10/command.ts";
 
 type Params = {
   display: "url" | "spec";
