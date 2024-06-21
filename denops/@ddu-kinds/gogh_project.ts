@@ -1,5 +1,5 @@
 import type { Denops } from "https://deno.land/x/denops_std@v6.5.0/mod.ts";
-import { BaseKind } from "https://deno.land/x/ddu_vim@v4.1.0/types.ts";
+import { BaseKind } from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
 import type {
   DduItem,
   PreviewContext,

@@ -2,7 +2,7 @@ import {
   ActionFlags,
   Actions,
   BaseKind,
-} from "https://deno.land/x/ddu_vim@v4.1.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
 import { openUrl } from "../ddu-kind-gogh/browsable.ts";
 
 type Params = Record<string, never>;
