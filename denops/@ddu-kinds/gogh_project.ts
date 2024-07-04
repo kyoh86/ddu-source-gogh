@@ -4,7 +4,7 @@ import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v4.1.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
 import { join } from "https://deno.land/std@0.224.0/path/mod.ts";
 import { exists, expandGlob } from "https://deno.land/std@0.224.0/fs/mod.ts";
 import { FileActions } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
