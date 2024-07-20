@@ -1,9 +1,9 @@
-import type { Denops } from "https://deno.land/x/denops_std@v6.5.0/mod.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v6.5.1/mod.ts";
 import type { GatherArguments } from "https://deno.land/x/ddu_vim@v4.1.1/base/source.ts";
 import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
 
 import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
-import { pathshorten } from "https://deno.land/x/denops_std@v6.5.0/function/mod.ts";
+import { pathshorten } from "https://deno.land/x/denops_std@v6.5.1/function/mod.ts";
 import {
   JSONLinesParseStream,
   JSONValue,
