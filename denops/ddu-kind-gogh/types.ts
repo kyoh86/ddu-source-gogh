@@ -1,4 +1,4 @@
-import { is } from "https://deno.land/x/unknownutil@v3.18.1/mod.ts";
+import { is } from "jsr:@core/unknownutil@3.18.1";
 
 export const isRepoActionData = is.ObjectOf({
   updatedAt: is.OptionalOf(is.String),

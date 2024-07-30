@@ -1,15 +1,15 @@
-import type { Denops } from "https://deno.land/x/denops_std@v6.5.1/mod.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v4.1.1/base/source.ts";
+import type { Denops } from "jsr:@denops/std@7.0.0";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@5.0.0/source";
 import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
 
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
-import { pathshorten } from "https://deno.land/x/denops_std@v6.5.1/function/mod.ts";
+import { BaseSource, type Item } from "jsr:@shougo/ddu-vim/types";
+import { pathshorten } from "jsr:@denops/std@7.0.0/function";
 import {
   JSONLinesParseStream,
-  JSONValue,
+  type JSONValue,
 } from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
-import { echoerrCommand } from "https://denopkg.com/kyoh86/denops-util@master/command.ts";
+import { echoerrCommand } from "jsr:@kyoh86/denops-util@0.1.0/command";
 
 type Params = {
   display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path" | "url";

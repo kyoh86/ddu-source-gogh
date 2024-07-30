@@ -1,13 +1,9 @@
+import { ensure, is, maybe } from "jsr:@core/unknownutil@3.18.1";
 import {
-  ensure,
-  is,
-  maybe,
-} from "https://deno.land/x/unknownutil@v3.18.1/mod.ts";
-import {
-  ActionArguments,
+  type ActionArguments,
   ActionFlags,
-  BaseActionParams,
-} from "https://deno.land/x/ddu_vim@v4.1.1/types.ts";
+  type BaseActionParams,
+} from "jsr:@shougo/ddu-vim/types";
 
 export async function openUrl<
   T extends BaseActionParams,
