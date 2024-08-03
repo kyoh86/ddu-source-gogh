@@ -1,19 +1,19 @@
-import { is } from "jsr:@core/unknownutil@~3.18.1";
+import { as, is } from "jsr:@core/unknownutil@~4.0.0";
 
 export const isRepoActionData = is.ObjectOf({
-  updatedAt: is.OptionalOf(is.String),
+  updatedAt: as.Optional(is.String),
   spec: is.ObjectOf({
-    host: is.OptionalOf(is.String),
+    host: as.Optional(is.String),
     owner: is.String,
     name: is.String,
   }),
   url: is.String,
-  description: is.OptionalOf(is.String),
-  homepage: is.OptionalOf(is.String),
-  language: is.OptionalOf(is.String),
-  archived: is.OptionalOf(is.Boolean),
-  private: is.OptionalOf(is.Boolean),
-  isTemplate: is.OptionalOf(is.Boolean),
+  description: as.Optional(is.String),
+  homepage: as.Optional(is.String),
+  language: as.Optional(is.String),
+  archived: as.Optional(is.Boolean),
+  private: as.Optional(is.Boolean),
+  isTemplate: as.Optional(is.Boolean),
 });
 
 export type RepoActionData = {
