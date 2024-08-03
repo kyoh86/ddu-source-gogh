@@ -1,4 +1,4 @@
-import { ensure, is, maybe } from "jsr:@core/unknownutil@3.18.1";
+import { ensure, is, maybe } from "jsr:@core/unknownutil@~3.18.1";
 import {
   type ActionArguments,
   ActionFlags,

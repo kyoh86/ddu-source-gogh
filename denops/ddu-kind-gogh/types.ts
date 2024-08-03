@@ -1,4 +1,4 @@
-import { is } from "jsr:@core/unknownutil@3.18.1";
+import { is } from "jsr:@core/unknownutil@~3.18.1";
 
 export const isRepoActionData = is.ObjectOf({
   updatedAt: is.OptionalOf(is.String),

@@ -1,16 +1,16 @@
-import type { Denops } from "jsr:@denops/std@7.0.1";
+import type { Denops } from "jsr:@denops/std@~7.0.1";
 import { BaseKind } from "jsr:@shougo/ddu-vim/types";
 import type {
   DduItem,
   PreviewContext,
   Previewer,
 } from "jsr:@shougo/ddu-vim/types";
-import { join } from "jsr:@std/path@1.0.2";
-import { exists, expandGlob } from "jsr:@std/fs@1.0.0";
+import { join } from "jsr:@std/path@~1.0.2";
+import { exists, expandGlob } from "jsr:@std/fs@~1.0.0";
 import {
   type ActionData as FileActionData,
   FileActions,
-} from "jsr:@shougo/ddu-kind-file@0.8.0";
+} from "jsr:@shougo/ddu-kind-file@~0.8.0";
 import { openUrl } from "../ddu-kind-gogh/browsable.ts";
 
 export type GoghProject = {
