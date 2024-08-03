@@ -16,10 +16,9 @@ Examples				|ddu-source-gogh-examples|
 Sources					|ddu-source-gogh-sources|
 Params for gogh_repo source		|ddu-source-gogh_repo-params|
 Params for gogh_project source		|ddu-source-gogh_project-params|
-Actions of gogh_repo kind 		|ddu-source-gogh_repo-actions|
+Actions of gogh_repo kind 		|ddu-kind-gogh_repo-actions|
 Action-data for gogh_repo kind		|ddu-kind-gogh_repo-action-data|
-Actions of gogh_project kind 		|ddu-source-gogh_project-actions|
-Action-data for gogh_project kind	|ddu-kind-gogh_project-action-data|
+Actions of gogh_project kind 		|ddu-kind-gogh_project-actions|
 
 
 ==============================================================================
