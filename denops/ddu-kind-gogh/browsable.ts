@@ -2,11 +2,11 @@ import { ensure, is, maybe } from "jsr:@core/unknownutil@~4.3.0";
 import {
   type ActionArguments,
   ActionFlags,
-  type BaseActionParams,
-} from "jsr:@shougo/ddu-vim/types";
+  type BaseParams,
+} from "jsr:@shougo/ddu-vim@~6.0.0/types";
 
 export async function openUrl<
-  T extends BaseActionParams,
+  T extends BaseParams,
   U extends { url: string },
 >(
   { denops, items, actionParams }: ActionArguments<T>,

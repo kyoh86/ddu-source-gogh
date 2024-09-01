@@ -1,4 +1,5 @@
-import { ActionFlags, type Actions, BaseKind } from "jsr:@shougo/ddu-vim/types";
+import { BaseKind } from "jsr:@shougo/ddu-vim@~6.0.0/kind";
+import { ActionFlags, type Actions } from "jsr:@shougo/ddu-vim@~6.0.0/types";
 import { openUrl } from "../ddu-kind-gogh/browsable.ts";
 
 type Params = Record<string, never>;

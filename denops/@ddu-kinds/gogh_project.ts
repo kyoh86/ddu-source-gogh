@@ -1,5 +1,5 @@
-import type { Denops } from "jsr:@denops/std@~7.0.1";
-import { BaseKind } from "jsr:@shougo/ddu-vim/types";
+import type { Denops } from "jsr:@denops/std@~7.1.0";
+import { BaseKind } from "jsr:@shougo/ddu-vim@~6.0.0/kind";
 import type {
   DduItem,
   PreviewContext,

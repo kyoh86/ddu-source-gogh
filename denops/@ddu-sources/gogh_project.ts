@@ -1,9 +1,9 @@
-import type { Denops } from "jsr:@denops/std@~7.0.1";
-import type { GatherArguments } from "jsr:@shougo/ddu-vim@~5.0.0/source";
+import type { Denops } from "jsr:@denops/std@~7.1.0";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@~6.0.0/source";
 import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
 
 import { BaseSource, type Item } from "jsr:@shougo/ddu-vim/types";
-import { pathshorten } from "jsr:@denops/std@~7.0.1/function";
+import { pathshorten } from "jsr:@denops/std@~7.1.0/function";
 import {
   JSONLinesParseStream,
   type JSONValue,
