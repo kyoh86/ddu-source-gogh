@@ -4,7 +4,7 @@ import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "jsr:@shougo/ddu-vim/types";
+} from "jsr:@shougo/ddu-vim@~6.0.0/types";
 import { join } from "jsr:@std/path@~1.0.2";
 import { exists, expandGlob } from "jsr:@std/fs@~1.0.0";
 import {
