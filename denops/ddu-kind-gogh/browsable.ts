@@ -3,7 +3,7 @@ import {
   type ActionArguments,
   ActionFlags,
   type BaseParams,
-} from "jsr:@shougo/ddu-vim@~6.0.0/types";
+} from "jsr:@shougo/ddu-vim@~6.1.0/types";
 
 export async function openUrl<
   T extends BaseParams,
