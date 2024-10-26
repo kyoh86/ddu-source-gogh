@@ -1,8 +1,8 @@
-import type { Denops } from "jsr:@denops/std@~7.1.0";
-import type { GatherArguments } from "jsr:@shougo/ddu-vim@~6.1.0/source";
-import type { Item } from "jsr:@shougo/ddu-vim@~6.1.0/types";
-import { BaseSource } from "jsr:@shougo/ddu-vim@~6.1.0/source";
-import { pathshorten } from "jsr:@denops/std@~7.1.0/function";
+import type { Denops } from "jsr:@denops/std@~7.3.0";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@~6.2.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@~6.2.0/types";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~6.2.0/source";
+import { pathshorten } from "jsr:@denops/std@~7.3.0/function";
 
 import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
 import {

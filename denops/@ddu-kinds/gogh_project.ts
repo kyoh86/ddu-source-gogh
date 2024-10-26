@@ -1,10 +1,10 @@
-import type { Denops } from "jsr:@denops/std@~7.1.0";
-import { BaseKind } from "jsr:@shougo/ddu-vim@~6.1.0/kind";
+import type { Denops } from "jsr:@denops/std@~7.3.0";
+import { BaseKind } from "jsr:@shougo/ddu-vim@~6.2.0/kind";
 import type {
   DduItem,
   PreviewContext,
   Previewer,
-} from "jsr:@shougo/ddu-vim@~6.1.0/types";
+} from "jsr:@shougo/ddu-vim@~6.2.0/types";
 import { join } from "jsr:@std/path@~1.0.2";
 import { exists, expandGlob } from "jsr:@std/fs@~1.0.0";
 import {
