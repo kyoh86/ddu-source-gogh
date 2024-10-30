@@ -1,4 +1,4 @@
-import type { Denops } from "jsr:@denops/std@~7.1.0";
+import type { Denops } from "jsr:@denops/std@~7.3.0";
 
 export class EchomsgStream extends WritableStream<string> {
   #cmd = "echomsg";
