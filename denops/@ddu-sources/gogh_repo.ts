@@ -1,7 +1,7 @@
 import type { Denops } from "jsr:@denops/std@~7.4.0";
-import type { GatherArguments } from "jsr:@shougo/ddu-vim@~7.0.0/source";
-import type { Item } from "jsr:@shougo/ddu-vim@~7.0.0/types";
-import { BaseSource } from "jsr:@shougo/ddu-vim@~7.0.0/source";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@~8.0.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@~8.0.0/types";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~8.0.0/source";
 import { ChunkedStream } from "jsr:@hibiki/chunked-stream@~0.1.4";
 import {
   JSONLinesParseStream,
