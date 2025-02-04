@@ -146,21 +146,21 @@ Action-data for gogh_repo kind ~
 Each items holds action data with "spec" and some properties of the repository
 like below.
 
-spec
-    (object)
-    An identifier of the repository with properties below.
-    host  (string|null)
-    owner (string)
-    name  (string)
+    spec
+        (object)
+        An identifier of the repository with properties below.
+        host  (string|null)
+        owner (string)
+        name  (string)
 
-updatedAt    (string|null)
-url          (string)
-description  (string|null)
-homepage     (string|null)
-language     (string|null)
-archived     (boolean|null)
-private      (boolean|null)
-isTemplate   (boolean|null)
+    updatedAt    (string|null)
+    url          (string)
+    description  (string|null)
+    homepage     (string|null)
+    language     (string|null)
+    archived     (boolean|null)
+    private      (boolean|null)
+    isTemplate   (boolean|null)
 
 
 ==============================================================================
@@ -169,6 +169,30 @@ Actions of gogh_repo kind ~
 
 gogh_project uses |ddu-kind-file| actions.
 You can see their actions in |ddu-kind-file-actions|.
+
+==============================================================================
+                                                  *ddu-kind-gogh_project-data*
+Action-data for gogh_project kind ~
+
+Each items holds action data with "path" and some properties of the repository
+like below.
+
+    path
+        (string)
+    fullFilePath
+        (string)
+    relPath
+        (string)
+    relFilePath
+        (string)
+    host
+        (string)
+    owner
+        (string)
+    name
+        (string)
+    url
+        (string)
 
 
 ==============================================================================
