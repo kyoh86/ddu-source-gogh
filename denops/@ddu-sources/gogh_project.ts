@@ -5,12 +5,7 @@ import { BaseSource } from "jsr:@shougo/ddu-vim@~9.5.0/source";
 import { pathshorten } from "jsr:@denops/std@~7.4.0/function";
 
 import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
-import {
-  JSONLinesParseStream,
-  type JSONValue,
-} from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
-
-import { echoerrCommand } from "jsr:@kyoh86/denops-util@~0.1.0/command";
+import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
 
 type Params = {
   display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path" | "url";
@@ -24,46 +19,38 @@ export class Source extends BaseSource<Params, ActionData> {
   ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream<Item<ActionData>[]>({
       start: async (controller) => {
-        const { wait, pipeOut, finalize } = echoerrCommand(denops, "gogh", {
+        const { status, stderr, stdout } = new Deno.Command("gogh", {
           args: ["list", "--format", "json"],
-        });
-        await Promise.all([
-          pipeOut
-            .pipeThrough(new JSONLinesParseStream())
-            .pipeThrough(
-              new TransformStream<JSONValue, Item<ActionData>>({
-                transform: async (value, controller) => {
-                  const project = value as GoghProject;
-                  controller.enqueue({
-                    word: project.relPath,
-                    display: await this.displayProject(
-                      denops,
-                      sourceParams,
-                      project,
-                    ),
-                    action: {
-                      ...project,
-                      path: project.fullFilePath,
-                      isDirectory: true,
-                    },
-                    treePath: project.fullFilePath,
-                    isTree: true,
-                  });
-                },
-              }),
-            )
-            .pipeTo(
-              new WritableStream({
-                write: (chunk) => {
-                  controller.enqueue([chunk]);
-                },
-              }),
+          stdin: "null",
+          stderr: "piped",
+          stdout: "piped",
+        }).spawn();
+
+        for await (const entry of iterJSON(stdout)) {
+          const project = entry as GoghProject;
+          controller.enqueue([{
+            word: project.relPath,
+            display: await this.displayProject(
+              denops,
+              sourceParams,
+              project,
             ),
-          wait,
-        ]).finally(async () => {
-          await finalize();
-          controller.close();
-        });
+            action: {
+              ...project,
+              path: project.fullFilePath,
+              isDirectory: true,
+            },
+            treePath: project.fullFilePath,
+            isTree: true,
+          }]);
+        }
+        const result = await status;
+        controller.close();
+        if (!result.success) {
+          for await (const line of iterLine(stderr)) {
+            console.error(line);
+          }
+        }
       },
     });
   }

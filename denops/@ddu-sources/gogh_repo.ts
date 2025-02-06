@@ -2,14 +2,9 @@ import type { Denops } from "jsr:@denops/std@~7.4.0";
 import type { GatherArguments } from "jsr:@shougo/ddu-vim@~9.5.0/source";
 import type { Item } from "jsr:@shougo/ddu-vim@~9.5.0/types";
 import { BaseSource } from "jsr:@shougo/ddu-vim@~9.5.0/source";
-import { ChunkedStream } from "jsr:@hibiki/chunked-stream@~0.1.4";
-import {
-  JSONLinesParseStream,
-  type JSONValue,
-} from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
 
 import type { RepoActionData } from "../ddu-kind-gogh/types.ts";
-import { echoerrCommand } from "jsr:@kyoh86/denops-util@~0.1.0/command";
+import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
 
 type Params = {
   display: "url" | "spec";
@@ -24,48 +19,34 @@ export class Source extends BaseSource<Params, RepoActionData> {
   ): ReadableStream<Item<RepoActionData>[]> {
     return new ReadableStream<Item<RepoActionData>[]>({
       start: async (controller) => {
-        const { wait, pipeOut, finalize } = echoerrCommand(
-          args.denops,
-          "gogh",
-          {
-            args: [
-              "repos",
-              "--format",
-              "json",
-              "--limit",
-              args.sourceParams.limit.toString(),
-            ],
-          },
-        );
+        const { status, stderr, stdout } = new Deno.Command("gogh", {
+          args: [
+            "repos",
+            "--format",
+            "json",
+            "--limit",
+            args.sourceParams.limit.toString(),
+          ],
+          stdin: "null",
+          stderr: "piped",
+          stdout: "piped",
+        }).spawn();
 
-        await Promise.all([
-          pipeOut
-            .pipeThrough(new JSONLinesParseStream())
-            .pipeThrough(
-              new TransformStream<JSONValue, Item<RepoActionData>>({
-                transform: async (value, controller) => {
-                  const repo = value as RepoActionData;
-                  controller.enqueue({
-                    word: repo.url,
-                    display: await this.displayProject(args, repo),
-                    action: repo,
-                  });
-                },
-              }),
-            )
-            .pipeThrough(new ChunkedStream({ chunkSize: 1000 }))
-            .pipeTo(
-              new WritableStream({
-                write: (chunk) => {
-                  controller.enqueue(chunk);
-                },
-              }),
-            ),
-          wait,
-        ]).finally(async () => {
-          await finalize();
-          controller.close();
-        });
+        for await (const entry of iterJSON(stdout)) {
+          const repo = entry as RepoActionData;
+          controller.enqueue([{
+            word: repo.url,
+            display: await this.displayProject(args, repo),
+            action: repo,
+          }]);
+        }
+        const result = await status;
+        controller.close();
+        if (!result.success) {
+          for await (const line of iterLine(stderr)) {
+            console.error(line);
+          }
+        }
       },
     });
   }
