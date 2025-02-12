@@ -3,8 +3,13 @@ import type { GatherArguments } from "jsr:@shougo/ddu-vim@~9.5.0/source";
 import type { Item } from "jsr:@shougo/ddu-vim@~9.5.0/types";
 import { BaseSource } from "jsr:@shougo/ddu-vim@~9.5.0/source";
 import { pathshorten } from "jsr:@denops/std@~7.4.0/function";
+import { ensure } from "jsr:@core/unknownutil@~4.3.0";
 
-import type { ActionData, GoghProject } from "../@ddu-kinds/gogh_project.ts";
+import {
+  type ActionData,
+  type GoghProject,
+  isGoghProject,
+} from "../@ddu-kinds/gogh_project.ts";
 import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
 
 type Params = {
@@ -27,7 +32,7 @@ export class Source extends BaseSource<Params, ActionData> {
         }).spawn();
 
         for await (const entry of iterJSON(stdout)) {
-          const project = entry as GoghProject;
+          const project = ensure(entry, isGoghProject);
           controller.enqueue([{
             word: project.relPath,
             display: await this.displayProject(
@@ -35,13 +40,7 @@ export class Source extends BaseSource<Params, ActionData> {
               sourceParams,
               project,
             ),
-            action: {
-              ...project,
-              path: project.fullFilePath,
-              isDirectory: true,
-            },
-            treePath: project.fullFilePath,
-            isTree: true,
+            action: { path: project.fullFilePath, ...project },
           }]);
         }
         const result = await status;

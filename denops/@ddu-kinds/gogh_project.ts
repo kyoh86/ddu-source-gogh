@@ -12,6 +12,7 @@ import {
   FileActions,
 } from "jsr:@shougo/ddu-kind-file@~0.9.0";
 import { openUrl } from "../ddu-kind-gogh/browsable.ts";
+import { is, type Predicate } from "jsr:@core/unknownutil@~4.3.0";
 
 export type GoghProject = {
   fullFilePath: string;
@@ -22,6 +23,16 @@ export type GoghProject = {
   name: string;
   url: string;
 };
+
+export const isGoghProject = is.ObjectOf({
+  fullFilePath: is.String,
+  relPath: is.String,
+  relFilePath: is.String,
+  host: is.String,
+  owner: is.String,
+  name: is.String,
+  url: is.String,
+}) satisfies Predicate<GoghProject>;
 
 export type ActionData = FileActionData & GoghProject;
 
