@@ -34,13 +34,18 @@ export class Source extends BaseSource<Params, ActionData> {
         for await (const entry of iterJSON(stdout)) {
           const project = ensure(entry, isGoghProject);
           controller.enqueue([{
-            word: project.relPath,
+            word: "relPath" in project ? project.relPath : project.path,
             display: await this.displayProject(
               denops,
               sourceParams,
               project,
             ),
-            action: { path: project.fullFilePath, ...project },
+            action: {
+              path: "fullFilePath" in project
+                ? project.fullFilePath
+                : project.fullPath,
+              ...project,
+            },
           }]);
         }
         const result = await status;
@@ -67,20 +72,27 @@ export class Source extends BaseSource<Params, ActionData> {
   ): Promise<string> {
     switch (sourceParams.display) {
       case "shorten":
-        return await pathshorten(denops, project.relPath);
+        return await pathshorten(
+          denops,
+          "relPath" in project ? project.relPath : project.path,
+        );
       case "rel-path":
-        return project.relPath;
+        return "relPath" in project ? project.relPath : project.path;
       case "rel-file-path":
-        return project.relFilePath;
+        return "relPath" in project ? project.relPath : project.path;
       case "full-file-path":
-        return project.fullFilePath;
+        return "fullFilePath" in project
+          ? project.fullFilePath
+          : project.fullPath;
       default:
         await denops.call(
           "ddu#util#print_error",
           `Invalid display param: ${sourceParams.display}`,
           "ddu-source-gogh",
         );
-        return project.fullFilePath;
+        return "fullFilePath" in project
+          ? project.fullFilePath
+          : project.fullPath;
     }
   }
 }

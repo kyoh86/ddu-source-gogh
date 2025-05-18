@@ -22,17 +22,34 @@ export type GoghProject = {
   owner: string;
   name: string;
   url: string;
+} | {
+  fullPath: string;
+  path: string;
+  host: string;
+  owner: string;
+  name: string;
+  url: string;
 };
 
-export const isGoghProject = is.ObjectOf({
-  fullFilePath: is.String,
-  relPath: is.String,
-  relFilePath: is.String,
-  host: is.String,
-  owner: is.String,
-  name: is.String,
-  url: is.String,
-}) satisfies Predicate<GoghProject>;
+export const isGoghProject = is.UnionOf([
+  is.ObjectOf({
+    fullFilePath: is.String,
+    relPath: is.String,
+    relFilePath: is.String,
+    host: is.String,
+    owner: is.String,
+    name: is.String,
+    url: is.String,
+  }),
+  is.ObjectOf({
+    fullPath: is.String,
+    path: is.String,
+    host: is.String,
+    owner: is.String,
+    name: is.String,
+    url: is.String,
+  }),
+]) satisfies Predicate<GoghProject>;
 
 export type ActionData = FileActionData & GoghProject;
 
