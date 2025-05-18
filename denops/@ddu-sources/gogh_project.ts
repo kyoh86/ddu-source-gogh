@@ -41,10 +41,11 @@ export class Source extends BaseSource<Params, ActionData> {
               project,
             ),
             action: {
+              ...project,
+              relPath: "relPath" in project ? project.relPath : project.path,
               path: "fullFilePath" in project
                 ? project.fullFilePath
                 : project.fullPath,
-              ...project,
             },
           }]);
         }
