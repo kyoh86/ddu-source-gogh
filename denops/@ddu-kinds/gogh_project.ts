@@ -28,7 +28,6 @@ export type GoghProject = {
   host: string;
   owner: string;
   name: string;
-  url: string;
 };
 
 export const isGoghProject = is.UnionOf([
@@ -47,7 +46,6 @@ export const isGoghProject = is.UnionOf([
     host: is.String,
     owner: is.String,
     name: is.String,
-    url: is.String,
   }),
 ]) satisfies Predicate<GoghProject>;
 

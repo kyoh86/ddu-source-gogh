@@ -13,7 +13,7 @@ import {
 import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
 
 type Params = {
-  display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path" | "url";
+  display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path";
 };
 
 export class Source extends BaseSource<Params, ActionData> {
