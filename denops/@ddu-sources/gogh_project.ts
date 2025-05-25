@@ -25,7 +25,7 @@ export class Source extends BaseSource<Params, ActionData> {
     return new ReadableStream<Item<ActionData>[]>({
       start: async (controller) => {
         const { status, stderr, stdout } = new Deno.Command("gogh", {
-          args: ["list", "--format", "json"],
+          args: ["list", "--format", "json", "--limit", "0"],
           stdin: "null",
           stderr: "piped",
           stdout: "piped",
