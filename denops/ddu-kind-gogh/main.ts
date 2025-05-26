@@ -23,8 +23,9 @@ export function main(denops: Denops) {
     },
     async get(uAction: unknown) {
       const action = ensure(uAction, isRepoActionData);
+      const spec = "spec" in action ? action.spec : action.ref;
       const command = new Deno.Command("gogh", {
-        args: ["get", action.spec.owner + "/" + action.spec.name],
+        args: ["get", spec.owner + "/" + spec.name],
       });
       const proc = command.spawn();
       await proc.status;

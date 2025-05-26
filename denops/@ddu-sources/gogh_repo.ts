@@ -64,7 +64,11 @@ export class Source extends BaseSource<Params, RepoActionData> {
   ): Promise<string> {
     switch (args.sourceParams.display) {
       case "spec":
-        return `${repo.spec.host}/${repo.spec.owner}/${repo.spec.name}`;
+        if ("spec" in repo) {
+          return `${repo.spec.host}/${repo.spec.owner}/${repo.spec.name}`;
+        } else {
+          return `${repo.ref.host}/${repo.ref.owner}/${repo.ref.name}`;
+        }
       case "url":
         return repo.url;
       default:
