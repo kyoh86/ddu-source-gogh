@@ -5,7 +5,7 @@ import type {
   PreviewContext,
   Previewer,
 } from "jsr:@shougo/ddu-vim@~10.3.0/types";
-import { join } from "jsr:@std/path@~1.0.2";
+import { join } from "jsr:@std/path@~1.1.0";
 import { exists, expandGlob } from "jsr:@std/fs@~1.0.0";
 import {
   type ActionData as FileActionData,
