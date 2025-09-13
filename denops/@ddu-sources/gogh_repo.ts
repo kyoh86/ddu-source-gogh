@@ -1,7 +1,7 @@
-import type { Denops } from "jsr:@denops/std@~7.6.0";
-import type { GatherArguments } from "jsr:@shougo/ddu-vim@~10.3.0/source";
-import type { Item } from "jsr:@shougo/ddu-vim@~10.3.0/types";
-import { BaseSource } from "jsr:@shougo/ddu-vim@~10.3.0/source";
+import type { Denops } from "jsr:@denops/std@~8.0.0";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@~11.1.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@~11.1.0/types";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~11.1.0/source";
 
 import type { RepoActionData } from "../ddu-kind-gogh/types.ts";
 import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
