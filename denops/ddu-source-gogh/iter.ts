@@ -1,9 +1,6 @@
-import {
-  JSONLinesParseStream,
-  type JSONValue,
-} from "https://deno.land/x/jsonlines@v1.2.2/mod.ts";
+import { JSONLinesParseStream, type JSONValue } from "@kyoh86/jsonlines";
 
-import { TextLineStream } from "jsr:@std/streams@1.0/text-line-stream";
+import { TextLineStream } from "@std/streams/text-line-stream";
 
 export async function* iterJSON(
   r: ReadableStream<Uint8Array>,
