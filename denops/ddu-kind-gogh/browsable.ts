@@ -1,9 +1,9 @@
-import { ensure, is, maybe } from "jsr:@core/unknownutil@~4.3.0";
+import { ensure, is, maybe } from "@core/unknownutil";
 import {
   type ActionArguments,
   ActionFlags,
   type BaseParams,
-} from "jsr:@shougo/ddu-vim@~11.1.0/types";
+} from "@shougo/ddu-vim/types";
 
 export async function openUrl<
   T extends BaseParams,

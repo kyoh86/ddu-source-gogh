@@ -1,9 +1,9 @@
-import type { Denops } from "jsr:@denops/std@~8.0.0";
-import type { GatherArguments } from "jsr:@shougo/ddu-vim@~11.1.0/source";
-import type { Item } from "jsr:@shougo/ddu-vim@~11.1.0/types";
-import { BaseSource } from "jsr:@shougo/ddu-vim@~11.1.0/source";
-import { pathshorten } from "jsr:@denops/std@~8.0.0/function";
-import { ensure } from "jsr:@core/unknownutil@~4.3.0";
+import type { Denops } from "@denops/std";
+import type { GatherArguments } from "@shougo/ddu-vim/source";
+import type { Item } from "@shougo/ddu-vim/types";
+import { BaseSource } from "@shougo/ddu-vim/source";
+import { pathshorten } from "@denops/std/function";
+import { ensure } from "@core/unknownutil";
 
 import {
   type ActionData,

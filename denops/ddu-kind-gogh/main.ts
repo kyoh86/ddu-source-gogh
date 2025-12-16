@@ -1,6 +1,6 @@
-import type { Denops } from "jsr:@denops/std@~8.0.0";
-import { ensure, is, maybe } from "jsr:@core/unknownutil@~4.3.0";
-import { systemopen } from "jsr:@lambdalisue/systemopen@~1.0.0";
+import type { Denops } from "@denops/std";
+import { ensure, is, maybe } from "@core/unknownutil";
+import { systemopen } from "@lambdalisue/systemopen";
 import { isRepoActionData } from "./types.ts";
 
 export function main(denops: Denops) {

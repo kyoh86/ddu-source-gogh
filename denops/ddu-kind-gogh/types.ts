@@ -1,4 +1,4 @@
-import { as, is, type Predicate } from "jsr:@core/unknownutil@~4.3.0";
+import { as, is, type Predicate } from "@core/unknownutil";
 
 export const isRepoActionData = is.UnionOf([
   is.ObjectOf({
