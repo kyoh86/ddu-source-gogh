@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "exports": {},
   "description": "ddu.vim source collects project paths managed in gogh",
+  "lock": false,
   "fmt": { "include": ["denops/**/*.ts", "deno.jsonc"] },
   "lint": { "include": ["denops/**/*.ts", "deno.jsonc"] },
   "test": { "include": ["denops/**/*_test.ts", "deno.jsonc"] },
@@ -13,6 +14,13 @@
     "lint": "deno lint",
     "test": "deno test --check --permit-no-files --allow-env=DENOPS_TEST_CONNECT_TIMEOUT,DENOPS_TEST_DENOPS_PATH,DENOPS_TEST_VERBOSE,DENOPS_TEST_VIM_EXECUTABLE,DENOPS_TEST_NVIM_EXECUTABLE,MSGPACKR_NATIVE_ACCELERATION_DISABLED --allow-run --allow-net=127.0.0.1:0 --allow-read"
   },
+  "workspace": [
+    "denops/ddu-source-gogh",
+    "denops/@ddu-sources",
+    "denops/@ddu-sources/gogh_util",
+    "denops/ddu-kind-gogh",
+    "denops/@ddu-kinds"
+  ],
   "imports": {
     "@core/unknownutil": "jsr:@core/unknownutil@^4.3.0",
     "@denops/std": "jsr:@denops/std@^8.2.0",
