@@ -3,8 +3,8 @@ import type { GatherArguments } from "@shougo/ddu-vim/source";
 import type { Item } from "@shougo/ddu-vim/types";
 import { BaseSource } from "@shougo/ddu-vim/source";
 
-import type { RepoActionData } from "../ddu-kind-gogh/types.ts";
-import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
+import type { RepoActionData } from "../../ddu-kind-gogh/types.ts";
+import { iterJSON, iterLine } from "../../ddu-source-gogh/iter.ts";
 
 type Params = {
   display: "url" | "spec";

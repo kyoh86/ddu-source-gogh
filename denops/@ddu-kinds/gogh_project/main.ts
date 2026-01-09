@@ -7,7 +7,7 @@ import {
   type ActionData as FileActionData,
   FileActions,
 } from "@shougo/ddu-kind-file";
-import { openUrl } from "../ddu-kind-gogh/browsable.ts";
+import { openUrl } from "../../ddu-kind-gogh/browsable.ts";
 import { is, type Predicate } from "@core/unknownutil";
 
 export type GoghProject = {

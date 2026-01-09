@@ -9,8 +9,8 @@ import {
   type ActionData,
   type GoghProject,
   isGoghProject,
-} from "../@ddu-kinds/gogh_project.ts";
-import { iterJSON, iterLine } from "../ddu-source-gogh/iter.ts";
+} from "../../@ddu-kinds/gogh_project/main.ts";
+import { iterJSON, iterLine } from "../../ddu-source-gogh/iter.ts";
 
 type Params = {
   display: "shorten" | "full-file-path" | "rel-file-path" | "rel-path";
