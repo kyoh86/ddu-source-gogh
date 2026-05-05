@@ -28,8 +28,10 @@
   },
   "workspace": [
     "./denops/@ddu-kinds/gogh_project",
+    "./denops/@ddu-kinds/gogh_worktree",
     "./denops/@ddu-kinds/gogh_repo",
     "./denops/@ddu-sources/gogh_project",
+    "./denops/@ddu-sources/gogh_worktree",
     "./denops/@ddu-sources/gogh_repo",
     "./denops/@ddu-sources/gogh_util"
   ],
